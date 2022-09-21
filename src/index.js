@@ -19,6 +19,7 @@ import ImageService from './js/image-service.js';
 const imageService = new ImageService();
 export const axios = require('axios');
 
+imageService.simpleLightbox = new SimpleLightbox('.gallery a');
 form.addEventListener('submit', onFormSubmit);
 searchBtn.addEventListener('click', onLoadMoreClick);
 
@@ -28,13 +29,14 @@ async function onFormSubmit(e) {
   clearCardContainer();
   imageService.query = e.currentTarget.elements.searchQuery.value.trim();
 
-  if (imageService.query === '') return lettersNeededMessage();
+  if (!imageService.query) return lettersNeededMessage();
 
   imageService.resetPage();
   try {
     const data = await imageService.fetchImages();
     checkAndRenderOnSubmitBtn(data);
   } catch (error) {
+    Notiflix.Notify.failure(`Error ${error}`);
     console.log(error);
   }
 }
@@ -45,6 +47,7 @@ async function onLoadMoreClick() {
     const data = await imageService.fetchImages();
     checkAndAddLightbox(data);
   } catch (error) {
+    Notiflix.Notify.failure(`Error ${error}`);
     console.log(error);
   }
 }
@@ -57,7 +60,7 @@ function checkAndRenderOnSubmitBtn(resolve) {
 
   renderCards(resolve);
 
-  imageService.simpleLightbox = new SimpleLightbox('.gallery a');
+//   imageService.simpleLightbox = new SimpleLightbox('.gallery a');
 }
 
 function checkAndAddLightbox(resolve) {
