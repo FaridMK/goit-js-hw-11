@@ -1,8 +1,8 @@
 
 
 import { axios } from '../index.js';
-const BASE_URL = 'https://pixabay.com/api/';
-const KEY = '30078306-2ba5f79c85dc6ca60b6a24118';
+// const BASE_URL = 'https://pixabay.com/api/';
+// const KEY = '30078306-2ba5f79c85dc6ca60b6a24118';
 
 export default class ImageService {
   constructor() {
@@ -14,6 +14,8 @@ export default class ImageService {
   async fetchImages() {
     
     try {
+      const BASE_URL = 'https://pixabay.com/api/';
+const KEY = '30078306-2ba5f79c85dc6ca60b6a24118';
     const url = `${BASE_URL}?key=${KEY}&q=${this.searchingImg}&image_type=photo&orientation=horizontal&safesearch=true&per_page=40&page=${this.page}`;
 
     const { data } = await axios.get(url);
@@ -21,7 +23,7 @@ export default class ImageService {
     return data;
   } catch (error) {
     console.log('ERROR: ' + error);
-  }
+  } 
 
   resetPage() {
     this.page = 1;
