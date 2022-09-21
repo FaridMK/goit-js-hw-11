@@ -25,9 +25,9 @@ const KEY = '30078306-2ba5f79c85dc6ca60b6a24118';
     console.log('ERROR: ' + error);
   } 
 
-  resetPage() {
-    this.page = 1;
-  }
+//   resetPage() {
+//     this.page = 1;
+//   }
 
   get query() {
     return this.searchingImg;
